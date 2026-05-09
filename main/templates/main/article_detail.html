@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+<h1>{{ article.title }}</h1>
+<p>Muallif: <b>{{ article.author.username }}</b> | Sana: {{ article.created_at|date:"d.m.Y H:i" }}</p>
+<hr>
+<p>{{ article.context }}</p>
+<p>Teglar: {% for tag in article.tags.all %}#{{ tag.name }} {% endfor %}</p>
+<hr>
+<a href="/articles/">Orqaga</a>
+{% if user == article.author %}
+    | <a href="/articles/{{ article.slug }}/edit/">Tahrirlash</a>
+    | <a href="/articles/{{ article.slug }}/delete/">O'chirish</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+{% block title %}O'chirish{% endblock %}
+{% block content %}
+<h1>Maqolani o'chirish</h1>
+<p>"<b>{{ article.title }}</b>" maqolasini o'chirishni tasdiqlaysizmi?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Ha, o'chirish</button>
+    <a href="/articles/{{ article.slug }}/">Bekor qilish</a>
+</form>
+{% endblock %}

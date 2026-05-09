@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Blog{% endblock %}</title>
+</head>
+<body>
+<nav>
+    <a href="/articles/">Maqolalar</a> |
+    <a href="/login/">Kirish</a> |
+    <a href="/register/">Ro'yxatdan o'tish</a>
+</nav>
+<hr>
+{% block content %}{% endblock %}
+</body>
+</html>

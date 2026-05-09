@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+{% block title %}Barcha maqolalar{% endblock %}
+{% block content %}
+<h1>Barcha maqolalar</h1>
+
+{% if user.is_authenticated %}
+<h2>Yangi maqola qo'shish</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Sarlavha:</label><br>
+    <input type="text" name="title" value="{{ form.title.value|default:'' }}" required><br><br>
+    <label>Matn:</label><br>
+    <textarea name="context" rows="5" cols="40" required>{{ form.context.value|default:'' }}</textarea><br><br>
+    <label>Teglar:</label><br>
+    {{ form.tags }}<br><br>
+    <button type="submit">Qo'shish</button>
+</form>
+<hr>
+{% endif %}
+
+{% for article in articles %}
+<h2><a href="/articles/{{ article.slug }}/">{{ article.title }}</a></h2>
+<p>Muallif: {{ article.author.username }} | Sana: {{ article.created_at|date:"d.m.Y H:i" }}</p>
+<p>{{ article.context|truncatewords:20 }}</p>
+<p>Teglar: {% for tag in article.tags.all %}#{{ tag.name }} {% endfor %}</p>
+<a href="/articles/{{ article.slug }}/">Batafsil</a>
+{% if user == article.author %}
+    | <a href="/articles/{{ article.slug }}/edit/">Tahrirlash</a>
+    | <a href="/articles/{{ article.slug }}/delete/">O'chirish</a>
+{% endif %}
+<hr>
+{% empty %}
+<p>Hali maqolalar yo'q.</p>
+{% endfor %}
+{% endblock %}

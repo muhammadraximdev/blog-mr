@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% block title %}Maqolani tahrirlash{% endblock %}
+{% block content %}
+<h1>Maqolani tahrirlash</h1>
+<form method="post">
+    {% csrf_token %}
+    <label>Sarlavha:</label><br>
+    <input type="text" name="title" value="{{ form.title.value|default:'' }}" required><br><br>
+    <label>Matn:</label><br>
+    <textarea name="context" rows="5" cols="40" required>{{ form.context.value|default:'' }}</textarea><br><br>
+    <label>Teglar:</label><br>
+    {{ form.tags }}<br><br>
+    <button type="submit">Saqlash</button>
+    <a href="/articles/{{ article.slug }}/">Bekor qilish</a>
+</form>
+{% endblock %}

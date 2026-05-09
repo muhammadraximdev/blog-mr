@@ -1,0 +1,18 @@
+{% extends 'user/base.html' %}
+{% block title %}Kirish{% endblock %}
+{% block content %}
+<h1>Tizimga kirish</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <label>{{ field.label }}:</label><br>
+        {{ field }}<br><br>
+    {% endfor %}
+    {% if form.non_field_errors %}
+        <p>{{ form.non_field_errors }}</p>
+    {% endif %}
+    <button type="submit">Kirish</button>
+</form>
+<br>
+<a href="/register/">Hisobingiz yo'qmi? Ro'yxatdan o'tish</a>
+{% endblock %}
